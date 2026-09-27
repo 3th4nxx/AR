@@ -1,1 +1,124 @@
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}:root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Arial,sans-serif;background:#07070a;color:#f7f7f8}html,body{margin:0;min-height:100%;background:#07070a}body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);overflow-x:hidden}button,input{font:inherit}button{cursor:pointer}.header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:18px;background:rgba(7,7,10,.84);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}.eyebrow{font-size:10px;letter-spacing:.16em;color:#8d8d96;font-weight:800}h1{font-size:29px;line-height:1;margin:5px 0 0;letter-spacing:-.04em}.iconButton,.closeButton{border:1px solid rgba(255,255,255,.1);background:#111116;color:#fff;border-radius:13px;padding:10px 13px;font-weight:800}main{max-width:1000px;margin:auto;padding:16px}.searchPanel{padding:4px 0 10px}.searchBox{display:flex;align-items:center;gap:9px;padding:7px 7px 7px 14px;background:#111116;border:1px solid rgba(255,255,255,.09);border-radius:18px}.searchBox span{color:#888894;font-size:24px}.searchBox input{min-width:0;flex:1;background:none;border:0;outline:0;color:#fff;font-size:16px}.searchBox input::placeholder{color:#686872}.searchBox button{border:0;border-radius:13px;padding:11px 14px;background:#fff;color:#08080a;font-weight:800}.chips{display:flex;gap:8px;overflow:auto;padding:11px 0 2px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid rgba(255,255,255,.08);background:#101014;color:#dddde2;border-radius:999px;padding:8px 12px;font-size:13px}.statusRow{display:flex;justify-content:space-between;color:#85858f;font-size:12px;padding:12px 2px}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{overflow:hidden;background:#101014;border:1px solid rgba(255,255,255,.08);border-radius:18px}.thumb{aspect-ratio:1;width:100%;object-fit:cover;display:block;background:#17171d}.cardBody{padding:11px}.cardTitle{font-weight:800;font-size:14px;line-height:1.2}.cardMeta{margin-top:5px;color:#85858f;font-size:11px;display:flex;justify-content:space-between;gap:5px}.cardActions{display:flex;gap:7px;margin-top:10px}.cardActions button{flex:1;border:0;border-radius:11px;padding:9px 7px;font-size:12px;font-weight:800}.previewButton{background:#24242b;color:#fff}.arMini{background:#fff;color:#09090b}.viewerPanel{position:fixed;z-index:30;inset:0;background:#07070a;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);display:flex;flex-direction:column}.viewerPanel.hidden{display:none}.viewerTop{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)}#viewerTitle{font-size:14px;font-weight:800;max-width:58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.viewerWrap{flex:1;min-height:0}model-viewer{width:100%;height:100%;background:radial-gradient(circle at 50% 45%,#25252d 0,#111116 43%,#07070a 100%)}.viewerInfo{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 16px 17px;border-top:1px solid rgba(255,255,255,.08)}.viewerName{font-size:17px;font-weight:850}.viewerMeta{font-size:12px;color:#85858f;margin-top:4px}.arButton{background:#fff;color:#09090b;text-decoration:none;font-weight:900;border-radius:13px;padding:11px 13px;white-space:nowrap}.licenseText{padding:0 16px 17px;color:#696972;font-size:10px;line-height:1.4}.empty{grid-column:1/-1;text-align:center;padding:55px 20px;color:#85858f}.spinner{width:22px;height:22px;border:3px solid #303038;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}@keyframes spin{to{transform:rotate(360deg)}}footer{display:flex;justify-content:space-between;max-width:1000px;margin:20px auto;padding:0 18px 28px;color:#5f5f68;font-size:10px}footer a{color:#8d8d98;text-decoration:none}@media(min-width:700px){.results{grid-template-columns:repeat(4,minmax(0,1fr))}}
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+}
+body {
+    position: fixed;
+    inset: 0;
+}
+#camera {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    display: none;
+}
+#three {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+#hud {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: white;
+}
+#topbar {
+    position: absolute;
+    top: max(18px, env(safe-area-inset-top));
+    left: 18px;
+    right: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand {
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(14px);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+#status {
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(14px);
+    font-size: 12px;
+}
+#center {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    transition: opacity .3s ease;
+}
+#message {
+    font-size: 30px;
+    font-weight: 800;
+    text-shadow: 0 2px 15px rgba(0,0,0,.5);
+}
+#submessage {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: .8;
+}
+#start {
+    pointer-events: auto;
+    position: absolute;
+    left: 50%;
+    bottom: max(95px, calc(env(safe-area-inset-bottom) + 75px));
+    transform: translateX(-50%);
+    border: 0;
+    border-radius: 999px;
+    padding: 16px 28px;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    background: rgba(20,20,20,.85);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0,0,0,.4);
+}
+#bottom {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+#voice,
+#pinch {
+    padding: 11px 14px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(14px);
+    font-size: 12px;
+}
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.active {
+    background: rgba(255,255,255,.2) !important;
+}
