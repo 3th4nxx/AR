@@ -3,20 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#07070a">
-<title>AR Vault</title>
-<link rel="stylesheet" href="style.css">
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script>
+<meta name="theme-color" content="#050505">
+<title>WebAR Cube</title>
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<header class="header"><div><div class="eyebrow">SPATIAL OBJECTS</div><h1>AR Vault</h1></div><button id="refreshButton" class="iconButton">↻</button></header>
-<main>
-<section class="searchPanel"><form id="searchForm"><div class="searchBox"><span>⌕</span><input id="searchInput" autocomplete="off" placeholder="Search objects..." value="car"><button type="submit">Search</button></div></form><div class="chips"><button class="chip" data-query="chair">Chair</button><button class="chip" data-query="car">Car</button><button class="chip" data-query="dog">Dog</button><button class="chip" data-query="robot">Robot</button><button class="chip" data-query="tree">Tree</button><button class="chip" data-query="dragon">Dragon</button></div></section>
-<section class="statusRow"><div id="status">Ready</div><div id="count"></div></section>
-<section id="results" class="results"></section>
-<section id="viewerPanel" class="viewerPanel hidden"><div class="viewerTop"><button id="closeViewer" class="closeButton">Close</button><div id="viewerTitle">Object</div></div><div class="viewerWrap"><model-viewer id="modelViewer" camera-controls auto-rotate shadow-intensity="1" exposure="1" ar ar-modes="quick-look webxr scene-viewer"></model-viewer></div><div class="viewerInfo"><div><div id="viewerName" class="viewerName"></div><div id="viewerMeta" class="viewerMeta"></div></div><a id="arButton" class="arButton" rel="ar" href="#" hidden>View in AR</a></div><div id="licenseText" class="licenseText"></div></section>
-</main>
-<footer><span>Models from 3DTomb</span><a href="https://3dtomb.space" target="_blank" rel="noopener">Source ↗</a></footer>
-<script src="app.js"></script>
+
+<video id="camera" autoplay muted playsinline></video>
+
+<canvas id="three"></canvas>
+
+<div id="hud">
+    <div id="topbar">
+        <div class="brand">WEBAR</div>
+        <div id="status">Camera off</div>
+    </div>
+
+    <div id="center">
+        <div id="message">Tap START</div>
+        <div id="submessage">Scan your surroundings</div>
+    </div>
+
+    <button id="start">START AR</button>
+
+    <div id="bottom">
+        <div id="voice">Say “cube”</div>
+        <div id="pinch">🤏 Pinch to grab</div>
+    </div>
+</div>
+
+<script type="module" src="./app.js"></script>
+
 </body>
 </html>
